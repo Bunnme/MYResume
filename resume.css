@@ -89,7 +89,7 @@ body {
 }
 
 .contact-item a {
-    color: #3498db;
+    color: #000000;
     text-decoration: none;
 }
 
@@ -155,7 +155,6 @@ body {
 }
 
 .course-list li i {
-    color: #297fb9c0;
     width: 20px;
     text-align: center;
 }
