@@ -33,7 +33,7 @@ body {
     object-fit: cover;
     border: 5px solid white;
     margin-bottom: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .header h1 {
@@ -59,11 +59,22 @@ body {
     background-color: white;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    text-align: center; /* จัดให้ข้อความและเนื้อหาอยู่ตรงกลาง */
+}
+
+.contact-title {
+    color: #2c3e50;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.contact-info {
     display: flex;
     justify-content: center;
     gap: 40px;
-    margin-bottom: 30px;
 }
 
 .contact-item {
@@ -78,7 +89,7 @@ body {
 }
 
 .contact-item a {
-    color: #333;
+    color: #3498db;
     text-decoration: none;
 }
 
@@ -98,7 +109,7 @@ body {
     background-color: white;
     padding: 25px;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
 }
 
@@ -113,10 +124,6 @@ body {
     gap: 10px;
 }
 
-.placeholder {
-    font-style: italic;
-    color: #888;
-}
 
 /* Coursework */
 .course-intro {
@@ -128,39 +135,42 @@ body {
 }
 
 .course-list li {
-    background-color: #f7f9fc;
+    background-color: #ebf5fb;
     padding: 10px;
-    border-radius: 4px;
+    border-radius: 20px;
     margin-bottom: 8px;
     display: flex;
     align-items: center;
     gap: 10px;
     border-left: 3px solid transparent;
+
 }
 
 .course-list li:hover {
-    border-left: 3px solid #3498db;
-    background-color: #ebf5fb;
+    background-color: #3498db;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(52, 152, 219, 0.2);
+
 }
 
 .course-list li i {
-    color: #7f8c8d;
+    color: #297fb9c0;
     width: 20px;
     text-align: center;
 }
 
 /* Education & Experience Items */
-.edu-item, .project-item {
+.edu-item,
+.project-item {
     margin-bottom: 15px;
 }
 
 .date {
     display: inline-block;
-    background-color: #3498db;
-    color: white;
-    padding: 2px 8px;
+    padding: 0px 0px;
     border-radius: 4px;
-    font-size: 0.9rem;
+    font-size: 1rem;
     margin-bottom: 5px;
 }
 
@@ -174,29 +184,25 @@ body {
 }
 
 /* Responsive (ปรับหน้าจอสำหรับมือถือ) */
+/* นำไปแทนที่ในส่วน @media (max-width: 768px) ของเดิมที่เกี่ยวกับ contact */
 @media (max-width: 768px) {
-    .resume-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .contact-bar {
+    .contact-info {
         flex-direction: column;
         align-items: center;
         gap: 15px;
     }
-    
-    .header h1 {
-        font-size: 2rem;
-    }
 }
+
 /* จัดการกล่องคอลัมน์วิชาเรียน */
 .course-grid {
     display: flex;
-    gap: 20px; /* ระยะห่างระหว่างคอลัมน์ซ้าย-ขวา */
+    gap: 20px;
+    /* ระยะห่างระหว่างคอลัมน์ซ้าย-ขวา */
 }
 
 .course-col {
-    flex: 1; /* ให้ 2 ฝั่งแบ่งพื้นที่เท่าๆ กัน */
+    flex: 1;
+    /* ให้ 2 ฝั่งแบ่งพื้นที่เท่าๆ กัน */
 }
 
 /* แถม: ทำให้มือถือดูสวย (เรียงต่อกันบนลงล่างเมื่อจอเล็ก) */
@@ -205,4 +211,39 @@ body {
         flex-direction: column;
         gap: 0;
     }
+}
+
+/* การตกแต่งส่วน Skills ให้เป็นรูปแบบ Tag */
+.skills-category {
+    margin-bottom: 20px;
+}
+
+.skills-category h3 {
+    font-size: 1.1rem;
+    color: #34495e;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill-tag {
+    background-color: #ebf5fb;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid #d6eaf8;
+    transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+    background-color: #3498db;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(52, 152, 219, 0.2);
 }
