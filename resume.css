@@ -27,8 +27,8 @@ body {
 }
 
 .profile-img {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     object-fit: cover;
     border: 5px solid white;
@@ -141,9 +141,8 @@ body {
     margin-bottom: 8px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    border-left: 3px solid transparent;
-
+    gap: 10px;  
+    border: 1px solid #d6eaf8;
 }
 
 .course-list li:hover {
@@ -161,8 +160,10 @@ body {
 
 /* Education & Experience Items */
 .edu-item,
-.project-item {
-    margin-bottom: 15px;
+.project-details {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 8px;
 }
 
 .date {
@@ -204,29 +205,48 @@ body {
     /* ให้ 2 ฝั่งแบ่งพื้นที่เท่าๆ กัน */
 }
 
-/* สำหรับหน้าจอมือถือ (กว้างไม่เกิน 768px) */
+/* =========================================
+   ส่วนรองรับหน้าจอมือถือและแท็บเล็ต (Responsive)
+   ========================================= */
 @media (max-width: 768px) {
-    /* สมมติว่ากล่องที่คลุมเนื้อหาทั้งหมดของคุณชื่อ .resume-grid */
-    /* ถ้าคุณใช้ชื่อคลาสอื่นตอนทำกรอบซ้ายขวา ให้เปลี่ยนชื่อคลาสให้ตรงกันนะครับ */
+    /* 1. จัดโครงสร้างหลัก (ซ้าย-ขวา) ให้เรียงเป็น บน-ล่าง */
     .resume-grid {
         display: flex;
-        flex-direction: column; /* สั่งให้เรียงจากบนลงล่าง */
+        flex-direction: column;
         gap: 20px;
     }
 
-    /* หรือถ้าคุณใช้ Grid ในการจัดหน้า ให้ใช้โค้ดนี้แทน */
-    /*
-    .resume-grid {
-        grid-template-columns: 1fr;
+    /* 2. จัดการส่วนช่องทางการติดต่อ */
+    .contact-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
     }
-    */
+
+    /* 3. แก้ไขส่วน "วิชาหลักที่สำคัญ" ไม่ให้ทะลุกรอบ */
+    .course-grid {
+        flex-direction: column; /* เปลี่ยนวิชาจาก 2 คอลัมน์ เป็นคอลัมน์เดียว */
+        gap: 10px;
+    }
+
+    .course-col {
+        width: 100%;
+    }
+
+    .course-list li {
+        width: 100%; /* บังคับให้กล่องกว้างเต็มพื้นที่พอดี ไม่ล้น */
+        box-sizing: border-box; /* สำคัญมาก: ป้องกันไม่ให้กรอบทะลุออกไปด้านนอก */
+        height: auto; /* ให้ความสูงยืดตามตัวหนังสือ */
+        margin-bottom: 10px;
+    }
     
-    /* ปรับแต่งส่วนหัวของแต่ละกล่องไม่ให้ตัวหนังสือกับไอคอนโดนบีบ */
+    /* 4. ปรับขนาดตัวอักษรหัวข้อบนมือถือไม่ให้โดนบีบ */
     .panel h2 {
         font-size: 1.1rem;
         display: flex;
         align-items: center;
-        flex-wrap: wrap; /* ยอมให้ข้อความปัดตกบรรทัดได้แบบสวยๆ ถ้าพื้นที่ไม่พอ */
+        flex-wrap: wrap; 
+        line-height: 1.4;
     }
 }
 
@@ -263,4 +283,82 @@ body {
     color: white;
     transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(52, 152, 219, 0.2);
+}
+/* =========================================
+   ระบบกล่องพับได้ (Accordion Panel)
+   ========================================= */
+
+/* ทำให้ส่วนหัวชี้เมาส์แล้วเป็นรูปมือ และจัดลูกศรไปอยู่ขวาสุด */
+.panel-header {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.3s ease;
+    border-bottom: none; /* เอาเส้นใต้เดิมออก */
+    padding-bottom: 0;
+}
+
+.panel-header:hover {
+    color: #3498db; /* เปลี่ยนสีตอนเอาเมาส์ชี้ */
+}
+
+/* ไอคอนลูกศร */
+.arrow-icon {
+    font-size: 1rem;
+    color: #95a5a6;
+    transition: transform 0.3s ease; /* ทำให้ลูกศรหมุนแบบสมูท */
+}
+
+/* ซ่อนเนื้อหาไว้ตอนเริ่มต้น */
+.panel-content {
+    display: none; /* ซ่อนไว้ */
+    margin-top: 15px;
+    animation: fadeInDown 0.4s ease; /* เรียกใช้อนิเมชัน */
+}
+
+/* คลาสที่จะถูก JavaScript สั่งเพิ่มเข้ามาตอนโดนคลิก */
+.panel-content.active {
+    display: block; /* โชว์เนื้อหา */
+}
+
+/* เมื่อคลิกแล้ว ให้ลูกศรหมุนชี้ขึ้น 180 องศา */
+.panel-header.active .arrow-icon {
+    transform: rotate(180deg);
+}
+
+/* อนิเมชันทำให้เนื้อหาค่อยๆ ลอยลงมา */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* เพิ่มมิติให้กล่อง (Card Hover Effect) */
+.panel {
+    transition: all 0.3s ease;
+}
+
+.panel:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    transform: translateY(-3px);
+}
+
+.panel-header {
+    border-bottom: none !important; 
+}
+.profile-img {
+    /* โค้ดเดิมของคุณจะมี width, height, border-radius ฯลฯ อยู่แล้ว ปล่อยไว้เหมือนเดิมครับ */
+    
+    cursor: pointer; /* เปลี่ยนเมาส์เป็นรูปมือตอนชี้ */
+    transition: transform 0.2s ease; /* ทำให้ตอนกดมีอนิเมชันนิดๆ */
+}
+
+/* แถม: ทำให้รูปหดลงนิดนึงตอนกดคลิก จะได้ดูเหมือนปุ่มจริงๆ */
+.profile-img:active {
+    transform: scale(0.95);
 }
